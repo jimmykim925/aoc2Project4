@@ -19,8 +19,10 @@
 
 - (void)viewDidLoad
 {
+  // User defaults on loading app
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
+  // Adds the object for event
   if (defaults != nil) {
     NSString *eventInfoString = [defaults objectForKey:@"event"];
     
@@ -37,8 +39,10 @@
   textView.text = [textView.text stringByAppendingString:eventString];
 }
 
+// Save button handler
 - (IBAction)saveButton:(id)sender
 {
+  // User defaults, setting object and key for string
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if (defaults !=nil) {
     NSString *eventInfoString = textView.text;
