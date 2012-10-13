@@ -33,12 +33,11 @@
 {
   [super viewWillAppear:animated];
   
-  leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipe:)];
-  leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-  [swipeLabel addGestureRecognizer:leftSwipe];
-  
+  // Add right swipe gesture
   rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipe:)];
   rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+  
+  // Add gesture to label
   [swipeLabel addGestureRecognizer:rightSwipe];
   
 }
@@ -46,21 +45,20 @@
 // Create selector function to handle swipes
 -(void)onSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-
+  if (recognizer.direction == UISwipeGestureRecognizerDirectionRight){
+   
+    DatePickerViewController *viewController = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
+  
+    if (viewController != nil){
+      viewController.delegate = self;
+      
+      // Transition type for modal view
+      [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+      
+      // Presents the modal view
+      [self presentViewController:viewController animated:TRUE completion:nil];
+    }
 }
 
-- (IBAction)swipeAddEvent:(id)sender {
-  DatePickerViewController *viewController = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
-  
-  // presents the modal view
-  if (viewController != nil){
-    viewController.delegate = self;
-    
-    // Transition type for modal view
-    [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    // Presents the modal view
-    [self presentViewController:viewController animated:TRUE completion:nil];
-  }
 }
 @end

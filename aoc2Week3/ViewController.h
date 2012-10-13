@@ -11,7 +11,6 @@
 
 @interface ViewController : UIViewController <DatePickerDelegate> 
 {
-  UISwipeGestureRecognizer *leftSwipe;
   UISwipeGestureRecognizer *rightSwipe;
 }
 
