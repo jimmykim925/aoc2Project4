@@ -19,6 +19,14 @@
 
 - (void)viewDidLoad
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  if (defaults != nil) {
+    NSString *eventInfoString = [defaults objectForKey:@"event"];
+    
+    textView.text = eventInfoString;
+  }
+
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -27,6 +35,17 @@
 {
   // Appends on text view all the new events on the same screen
   textView.text = [textView.text stringByAppendingString:eventString];
+}
+
+- (IBAction)saveButton:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if (defaults !=nil) {
+    NSString *eventInfoString = textView.text;
+    [defaults setObject:eventInfoString forKey:@"event"];
+    
+    [defaults synchronize];
+  }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -61,4 +80,5 @@
 }
 
 }
+
 @end

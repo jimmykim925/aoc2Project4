@@ -18,5 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *swipeLabel;
 
+- (IBAction)saveButton:(id)sender;
 
 @end
