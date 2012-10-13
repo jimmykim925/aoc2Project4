@@ -14,7 +14,7 @@
 
 @implementation DatePickerViewController
 @synthesize delegate;
-
+@synthesize swipeLeftLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,23 +42,22 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
   
+  // Add left swipe gesture
+  leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipe:)];
+  leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+  
+  // Add gesture to label
+  [swipeLeftLabel addGestureRecognizer:leftSwipe];
+  
   [super viewWillAppear:animated];
 
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification
+// Create selector function to handle swipes
+-(void)onSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-
-}
-
-- (IBAction)saveButton:(id)sender {
-  
-  if (delegate != nil){
+  if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft){
+   if (delegate != nil){
     
     // format string to include date and event text use delegate to send info to view controller
     if (selectedDate !=nil) {
@@ -81,6 +80,18 @@
   }
   // Dismisses modal view
   [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+
 }
 
 - (IBAction)closeKeyboard:(id)sender {

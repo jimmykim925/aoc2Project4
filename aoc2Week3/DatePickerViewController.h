@@ -22,12 +22,15 @@
   IBOutlet UITextField *textField;
   NSDate *currentDate;
   NSString *selectedDate;
+  UISwipeGestureRecognizer *leftSwipe;
 }
 
 @property (strong) id<DatePickerDelegate> delegate;
 
-- (IBAction)saveButton:(id)sender;
+
 - (IBAction)closeKeyboard:(id)sender;
 - (IBAction)datePicker:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *swipeLeftLabel;
 
 @end
