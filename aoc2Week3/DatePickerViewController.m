@@ -31,6 +31,9 @@
 {
   [super viewDidLoad];
   
+  // Sets minimum date on Load
+  [datePickerOutlet setMinimumDate:[NSDate date]];
+  
   // Sets the current date
   currentDate = [NSDate date];
 }
@@ -112,9 +115,7 @@
      if (dateFormat != nil) {
       [dateFormat setDateFormat:@"yyyy, MMMM, dd hh:mm aaa"];
       }
-        
-    // Sets minimum date/time to current date
-    [datePicker setMinimumDate:currentDate];
+     
     selectedDate = [dateFormat stringFromDate:date];
   }
 }

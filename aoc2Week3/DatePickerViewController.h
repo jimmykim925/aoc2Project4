@@ -23,6 +23,7 @@
   NSDate *currentDate;
   NSString *selectedDate;
   UISwipeGestureRecognizer *leftSwipe;
+  __weak IBOutlet UIDatePicker *datePickerOutlet;
 }
 
 @property (strong) id<DatePickerDelegate> delegate;
